@@ -76,7 +76,7 @@ def main():
                 now = time.time()
                 if last_change_time is None:
                     last_change_time = now
-                    print(f"[{datetime.now().strftime('%H:%M:%S')}] Modifications detected, debouncing {DEBOUNCE_SECONDS}s...")
+                    print(f"[{datetime.now().strftime('%H:%M:%S')}] Modifications detected, debouncing {DEBOUNCE_SECONDS}s...", flush=True)
                 elif now - last_change_time >= DEBOUNCE_SECONDS:
                     auto_commit_and_push(files)
                     last_change_time = None
