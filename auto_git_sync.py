@@ -46,26 +46,26 @@ def auto_commit_and_push(changed_files):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     commit_msg = f"auto-sync: update {files_summary} ({timestamp})"
 
-    print(f"[{timestamp}] Changes detected: {files_summary}")
-    print("  -> Staging files...")
+    print(f"[{timestamp}] Changes detected: {files_summary}", flush=True)
+    print("  -> Staging files...", flush=True)
     run_cmd("git add .")
 
-    print(f"  -> Committing: {commit_msg}")
+    print(f"  -> Committing: {commit_msg}", flush=True)
     run_cmd(f'git commit -m "{commit_msg}"')
 
-    print("  -> Pushing to origin main...")
+    print("  -> Pushing to origin main...", flush=True)
     code, out, err = run_cmd("git push origin main")
     if code == 0:
-        print(f"[{datetime.now().strftime('%H:%M:%S')}] Successfully pushed to GitHub!\n")
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Successfully pushed to GitHub!\n", flush=True)
     else:
-        print(f"[{datetime.now().strftime('%H:%M:%S')}] Push warning / retry next cycle: {err or out}\n")
+        print(f"[{datetime.now().strftime('%H:%M:%S')}] Push warning / retry next cycle: {err or out}\n", flush=True)
 
 def main():
-    print("=" * 65)
-    print("  Auto-Git-Sync Daemon Active")
-    print(f"  Watching: {REPO_DIR}")
-    print(f"  Check interval: {CHECK_INTERVAL_SECONDS}s | Debounce: {DEBOUNCE_SECONDS}s")
-    print("=" * 65)
+    print("=" * 65, flush=True)
+    print("  Auto-Git-Sync Daemon Active", flush=True)
+    print(f"  Watching: {REPO_DIR}", flush=True)
+    print(f"  Check interval: {CHECK_INTERVAL_SECONDS}s | Debounce: {DEBOUNCE_SECONDS}s", flush=True)
+    print("=" * 65, flush=True)
 
     last_change_time = None
 
