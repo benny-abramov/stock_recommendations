@@ -1,0 +1,26 @@
+# Environments
+.venv/
+env/
+venv/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Databases & local state
+*.sqlite3
+*.db
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs & temp media
+*.log
+.tempmediaStorage/

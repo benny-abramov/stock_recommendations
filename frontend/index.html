@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alpha Convergence Engine | Daily AI Stock Recommendation & Technical Analysis Hub</title>
+  <meta name="description" content="AI-driven daily stock recommendation hub and advanced technical analysis terminal. Scans SEC Form 4 insider cluster buying, technical volume breakouts, Wall Street analyst upgrades, and unjustified post-earnings drops.">
+  
+  <!-- Modern Institutional Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <!-- App Header & Navigation -->
+  <header class="app-header">
+    <div class="brand-section">
+      <div class="brand-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+          <polyline points="16 7 22 7 22 13"></polyline>
+        </svg>
+      </div>
+      <div class="brand-title-group">
+        <h1>ALPHA CONVERGENCE ENGINE</h1>
+        <div class="brand-subtitle">AI Multi-Signal Recommendation & Technical Playbook</div>
+      </div>
+    </div>
+
+    <div class="header-status-group">
+      <div class="market-status-pill" id="market-status-pill">
+        <span class="pulse-dot"></span>
+        <span id="market-status-text">MARKET ACTIVE • SIGNAL CONFLUENCE ONLINE</span>
+      </div>
+      <button class="scan-btn" id="trigger-scan-btn" title="Run Multi-Signal Pipeline Rescan">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+        </svg>
+        <span>Rescan Pipeline</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Application Container -->
+  <main class="app-container">
+
+    <!-- CONCEPT 1: TOP 5 HIGH-CONVICTION PICKS -->
+    <section class="top-picks-section" aria-label="Daily Top Picks">
+      <div class="section-header">
+        <div class="section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2.5">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          <span>Daily Top 5 High-Conviction Confluence Picks</span>
+        </div>
+        <span class="section-tag">MULTI-ASYMMETRIC ALIGNMENT</span>
+      </div>
+
+      <!-- Carousel / Grid Container -->
+      <div class="top-picks-grid" id="top-picks-container">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+    </section>
+
+    <!-- MAIN WORKSPACE: CONCEPT 2 (CHARTING SUITE) + CONCEPT 1 (RADAR & PLAYBOOK) -->
+    <div class="workspace-grid">
+
+      <!-- LEFT COLUMN: INTERACTIVE CHARTING SUITE + MULTI-SIGNAL DEEP DIVE -->
+      <div style="display:flex; flex-direction:column; gap:1.25rem;">
+        
+        <!-- CHARTING SUITE PANEL -->
+        <section class="card-panel" aria-label="Technical Charting Terminal">
+          <div class="chart-header">
+            <div class="chart-ticker-meta">
+              <span class="chart-active-ticker" id="chart-active-ticker">--</span>
+              <span class="chart-active-name" id="chart-active-name">Loading asset details...</span>
+              <span class="chart-active-price" id="chart-active-price">$0.00</span>
+              <span class="chart-period-badge up" id="chart-period-badge" title="Total return over selected graph period">
+                ▲ +0.00% (1M)
+              </span>
+              <span class="chart-daily-pill" id="chart-daily-pill" title="24-hour daily price change">
+                24h: +0.00%
+              </span>
+            </div>
+
+            <!-- Timeframe Resolution Tabs (1D, 5D, 1M, 6M, 1Y, YTD) -->
+            <div class="timeframe-pill-group" role="tablist" aria-label="Resolution Timeframe">
+              <button class="timeframe-tab" id="tf-1d" data-tf="1D">1D</button>
+              <button class="timeframe-tab" id="tf-5d" data-tf="5D">5D</button>
+              <button class="timeframe-tab active" id="tf-1m" data-tf="1M">1M</button>
+              <button class="timeframe-tab" id="tf-6m" data-tf="6M">6M</button>
+              <button class="timeframe-tab" id="tf-1y" data-tf="1Y">1Y</button>
+              <button class="timeframe-tab" id="tf-ytd" data-tf="YTD">YTD</button>
+            </div>
+          </div>
+
+          <!-- Dynamic TA Overlays & Sub-charts Toolbar -->
+          <div class="indicators-toolbar">
+            <span class="toolbar-label">Price Display:</span>
+            <button class="indicator-toggle price-mode-toggle" id="toggle-price-candles" data-price-mode="candles" title="Display Open, High, Low, and Close (Candlesticks)">
+              <span class="indicator-dot" style="background:var(--accent-green);"></span> Candles (OHLC)
+            </button>
+            <button class="indicator-toggle price-mode-toggle active" id="toggle-price-close" data-price-mode="close" title="Display only the Close price (Line + Area)">
+              <span class="indicator-dot" style="background:var(--accent-cyan);"></span> Close Only (Line)
+            </button>
+
+            <span class="toolbar-label" style="margin-left: 0.85rem;">Overlays:</span>
+            <button class="indicator-toggle overlay-toggle" id="toggle-sma20" data-overlay="sma20">
+              <span class="indicator-dot dot-sma20"></span> SMA 20
+            </button>
+            <button class="indicator-toggle overlay-toggle" id="toggle-sma50" data-overlay="sma50">
+              <span class="indicator-dot dot-sma50"></span> SMA 50
+            </button>
+            <button class="indicator-toggle overlay-toggle" id="toggle-sma200" data-overlay="sma200">
+              <span class="indicator-dot dot-sma200"></span> SMA 200
+            </button>
+            <button class="indicator-toggle overlay-toggle" id="toggle-ema20" data-overlay="ema20">
+              <span class="indicator-dot dot-ema20"></span> EMA 20
+            </button>
+            <button class="indicator-toggle overlay-toggle" id="toggle-bollinger" data-overlay="bollinger">
+              <span class="indicator-dot dot-bb"></span> Bollinger Bands
+            </button>
+
+            <span class="toolbar-label" style="margin-left: 0.85rem;">Sub-chart:</span>
+            <button class="indicator-toggle sub-indicator-toggle active" id="toggle-sub-none" data-sub="none">
+              None
+            </button>
+            <button class="indicator-toggle sub-indicator-toggle" id="toggle-rsi" data-sub="rsi">
+              <span class="indicator-dot dot-rsi"></span> RSI (14)
+            </button>
+            <button class="indicator-toggle sub-indicator-toggle" id="toggle-macd" data-sub="macd">
+              <span class="indicator-dot dot-macd"></span> MACD
+            </button>
+            <button class="indicator-toggle sub-indicator-toggle" id="toggle-obv" data-sub="obv">
+              <span class="indicator-dot dot-obv"></span> OBV
+            </button>
+          </div>
+
+          <!-- Crosshair HUD -->
+          <div class="crosshair-hud" id="chart-crosshair-hud">
+            <div class="hud-item"><span>TIME:</span><b class="hud-val">Hover candle to inspect</b></div>
+          </div>
+
+          <!-- Canvases -->
+          <div class="chart-viewport">
+            <canvas id="main-candlestick-canvas"></canvas>
+            <canvas id="sub-indicators-canvas" style="display:none;"></canvas>
+          </div>
+        </section>
+
+        <!-- MULTI-SIGNAL DEEP DIVE DETAILS PANEL -->
+        <section class="card-panel" aria-label="Signal Breakdown Details">
+          <nav class="tabs-nav-bar" role="tablist">
+            <button class="detail-nav-tab active" id="nav-tab-insiders" data-tab="insiders">
+              SEC Form 4 Insiders
+            </button>
+            <button class="detail-nav-tab" id="nav-tab-analysts" data-tab="analysts">
+              Wall St Consensus
+            </button>
+            <button class="detail-nav-tab" id="nav-tab-drop" data-tab="drop">
+              'Unjustified Drop' Scanner
+            </button>
+            <button class="detail-nav-tab" id="nav-tab-news" data-tab="news">
+              Sentiment & News Buzz
+            </button>
+          </nav>
+
+          <!-- Tab Pane 1: SEC Form 4 Insiders -->
+          <div class="tab-pane active" id="tab-pane-insiders">
+            <div class="trading-table-wrap">
+              <table class="trading-table" id="insider-trades-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Filer Name</th>
+                    <th>Executive Title</th>
+                    <th>Transaction Type</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                    <th>Total Value</th>
+                  </tr>
+                </thead>
+                <tbody id="insider-trades-tbody">
+                  <!-- Injected by app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Tab Pane 2: Analyst Consensus -->
+          <div class="tab-pane" id="tab-pane-analysts">
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem; margin-bottom:1rem;">
+              <div class="playbook-text-block">
+                <div class="block-title">Consensus Rating</div>
+                <div id="anly-consensus-rating" style="font-size:1.2rem; font-weight:800; color:var(--accent-cyan);">--</div>
+                <div id="anly-num-firms" style="font-size:0.75rem; color:#94a3b8; margin-top:0.25rem;">--</div>
+              </div>
+              <div class="playbook-text-block">
+                <div class="block-title">Consensus Target Price</div>
+                <div id="anly-target-price" style="font-size:1.2rem; font-weight:800; color:var(--accent-green); font-family:var(--font-mono);">--</div>
+                <div id="anly-upside-pct" style="font-size:0.75rem; color:var(--accent-green); margin-top:0.25rem; font-weight:700;">--</div>
+              </div>
+              <div class="playbook-text-block">
+                <div class="block-title">Key Catalysts</div>
+                <div style="font-size:0.8rem; color:#cbd5e1;">Top-tier institutional upgrades and revisions in the past 14 days.</div>
+              </div>
+            </div>
+            <div class="playbook-text-block">
+              <div class="block-title">Recent Wall Street Target Upgrades & Ratings Shifts</div>
+              <ul id="anly-recent-shifts-list" class="block-content"></ul>
+            </div>
+          </div>
+
+          <!-- Tab Pane 3: Unjustified Drop Scanner -->
+          <div class="tab-pane" id="tab-pane-drop">
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem; margin-bottom:1rem;">
+              <div class="playbook-text-block">
+                <div class="block-title">Scanner Status</div>
+                <div id="drop-flag-status" style="font-size:0.95rem; font-weight:800; color:var(--accent-amber);">--</div>
+              </div>
+              <div class="playbook-text-block">
+                <div class="block-title">24h Net Price Change</div>
+                <div id="drop-val-24h" style="font-size:1.2rem; font-weight:800; color:var(--accent-red); font-family:var(--font-mono);">--</div>
+              </div>
+              <div class="playbook-text-block">
+                <div class="block-title">Earnings Beat & EPS Surprise</div>
+                <div id="drop-val-beat" style="font-size:0.95rem; font-weight:700; color:var(--accent-green);">--</div>
+                <div id="drop-val-eps" style="font-size:0.75rem; color:#94a3b8; margin-top:0.2rem;">--</div>
+              </div>
+            </div>
+            <div class="playbook-text-block">
+              <div class="block-title">Asymmetrical Dip Turnaround Thesis</div>
+              <p id="drop-val-thesis" class="block-content"></p>
+            </div>
+          </div>
+
+          <!-- Tab Pane 4: Sentiment & News Buzz -->
+          <div class="tab-pane" id="tab-pane-news">
+            <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:1rem; margin-bottom:1rem;">
+              <div class="playbook-text-block">
+                <div class="block-title">Daily Bullish Buzz Index</div>
+                <div id="news-buzz-index" style="font-size:1.2rem; font-weight:800; color:var(--accent-purple); font-family:var(--font-mono);">--</div>
+              </div>
+              <div class="playbook-text-block">
+                <div class="block-title">Sentiment Classification</div>
+                <div id="news-sentiment-label" style="font-size:1.1rem; font-weight:800; color:var(--accent-green);">--</div>
+              </div>
+              <div class="playbook-text-block">
+                <div class="block-title">Bullish Articles Ratio</div>
+                <div id="news-bullish-ratio" style="font-size:1.1rem; font-weight:800; color:#38bdf8; font-family:var(--font-mono);">--</div>
+              </div>
+            </div>
+            <div class="playbook-text-block">
+              <div class="block-title">Top Parsed Financial Headlines (NLP Scored)</div>
+              <div id="news-headlines-list" style="display:flex; flex-direction:column; gap:0.6rem;"></div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- RIGHT COLUMN: 5-AXIS RADAR CHART + AI AUTOMATED PATTERN EXPLAINER -->
+      <div style="display:flex; flex-direction:column; gap:1.25rem;">
+        
+        <!-- 5-AXIS RADAR CONVERGENCE CARD -->
+        <section class="card-panel" aria-label="Alpha Convergence Radar">
+          <div class="section-header">
+            <div class="section-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+              <span>Signal Confluence Radar</span>
+            </div>
+            <span class="section-tag" id="sb-score-total">0/100</span>
+          </div>
+
+          <div class="radar-card-content">
+            <div class="radar-canvas-box">
+              <canvas id="convergence-radar-canvas"></canvas>
+            </div>
+
+            <!-- Signal Breakdown List -->
+            <div class="signals-breakdown-list">
+              <div class="signal-row">
+                <div class="signal-title-group">
+                  <div class="signal-icon-badge" style="background:rgba(0,242,254,0.15); color:var(--accent-cyan);">⚡</div>
+                  <div class="signal-meta-text">
+                    <span class="signal-name">Technical & RVOL Breakout</span>
+                    <span class="signal-desc">RSI bounce, MACD crossover, >2.5x volume</span>
+                  </div>
+                </div>
+                <span class="signal-score-badge" id="sb-score-tech" style="background:rgba(0,242,254,0.15); color:var(--accent-cyan);">--</span>
+              </div>
+
+              <div class="signal-row">
+                <div class="signal-title-group">
+                  <div class="signal-icon-badge" style="background:rgba(255,183,3,0.15); color:var(--accent-amber);">💼</div>
+                  <div class="signal-meta-text">
+                    <span class="signal-name">SEC Form 4 Insider Tracking</span>
+                    <span class="signal-desc">C-Suite open market cluster purchases</span>
+                  </div>
+                </div>
+                <span class="signal-score-badge" id="sb-score-insider" style="background:rgba(255,183,3,0.15); color:var(--accent-amber);">--</span>
+              </div>
+
+              <div class="signal-row">
+                <div class="signal-title-group">
+                  <div class="signal-icon-badge" style="background:rgba(79,172,254,0.15); color:var(--accent-blue);">🎯</div>
+                  <div class="signal-meta-text">
+                    <span class="signal-name">Analyst Target Alignment</span>
+                    <span class="signal-desc">Consensus upgrades & price upside %</span>
+                  </div>
+                </div>
+                <span class="signal-score-badge" id="sb-score-analyst" style="background:rgba(79,172,254,0.15); color:var(--accent-blue);">--</span>
+              </div>
+
+              <div class="signal-row">
+                <div class="signal-title-group">
+                  <div class="signal-icon-badge" style="background:rgba(0,230,118,0.15); color:var(--accent-green);">📉</div>
+                  <div class="signal-meta-text">
+                    <span class="signal-name">Unjustified Drop Scanner</span>
+                    <span class="signal-desc">>5% 24h dip post-earnings beat</span>
+                  </div>
+                </div>
+                <span class="signal-score-badge" id="sb-score-drop" style="background:rgba(0,230,118,0.15); color:var(--accent-green);">--</span>
+              </div>
+
+              <div class="signal-row">
+                <div class="signal-title-group">
+                  <div class="signal-icon-badge" style="background:rgba(157,78,221,0.15); color:var(--accent-purple);">📰</div>
+                  <div class="signal-meta-text">
+                    <span class="signal-name">NLP Headline Sentiment</span>
+                    <span class="signal-desc">Institutional buzz & bullish ratio</span>
+                  </div>
+                </div>
+                <span class="signal-score-badge" id="sb-score-sentiment" style="background:rgba(157,78,221,0.15); color:var(--accent-purple);">--</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- AI AUTOMATED PATTERN EXPLAINER & PLAYBOOK CARD -->
+        <section class="card-panel ai-explainer-panel" aria-label="AI Pattern Explainer">
+          <div class="section-header">
+            <div class="section-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-purple)" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 16v-4"></path>
+                <path d="M12 8h.01"></path>
+              </svg>
+              <span>AI Automated Technical Playbook</span>
+            </div>
+            <span class="section-tag" style="background:rgba(157,78,221,0.15); color:var(--accent-purple); border-color:rgba(157,78,221,0.3);">
+              DEEP SYNTHESIS
+            </span>
+          </div>
+
+          <div class="ai-header-badge-row">
+            <div class="ai-bias-badge" id="ai-bias-badge">
+              <span>●</span>
+              <span id="ai-bias-badge-text">ANALYZING BIAS</span>
+            </div>
+            <div class="ai-rr-badge" id="ai-rr-badge">
+              <span id="ai-rr-text">R:R --</span>
+            </div>
+          </div>
+
+          <div class="ai-pattern-title-banner">
+            <div class="pattern-kicker">Detected Technical Setup</div>
+            <div class="pattern-heading" id="ai-pattern-heading">Evaluating chart data arrays...</div>
+          </div>
+
+          <!-- Key Price Levels -->
+          <div class="price-levels-grid">
+            <div class="price-level-card">
+              <span class="level-label">Support</span>
+              <span class="level-val val-support" id="ai-val-support">$0.00</span>
+            </div>
+            <div class="price-level-card">
+              <span class="level-label">Resistance</span>
+              <span class="level-val val-resistance" id="ai-val-resistance">$0.00</span>
+            </div>
+            <div class="price-level-card">
+              <span class="level-label">Target</span>
+              <span class="level-val val-target" id="ai-val-target">$0.00</span>
+            </div>
+            <div class="price-level-card">
+              <span class="level-label">Stop-Loss</span>
+              <span class="level-val val-stop" id="ai-val-stop">$0.00</span>
+            </div>
+          </div>
+
+          <!-- Technical Narrative -->
+          <div class="playbook-text-block">
+            <div class="block-title">Technical Array Interpretation</div>
+            <p class="block-content" id="ai-tech-summary-text">Synthesizing chart data arrays...</p>
+          </div>
+
+          <!-- Multi-Signal Confluence -->
+          <div class="playbook-text-block">
+            <div class="block-title">Multi-Signal Confluence Catalysts</div>
+            <p class="block-content" id="ai-confluence-text" style="color:var(--accent-cyan); font-weight:500;">...</p>
+          </div>
+
+          <!-- Actionable Playbook Execution -->
+          <div class="playbook-text-block">
+            <div class="block-title">Actionable Trading Playbook</div>
+            <ul class="block-content" id="ai-playbook-list"></ul>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+
+    <!-- FULL UNIVERSE SCREENER & RANKING TABLE -->
+    <section class="card-panel screener-section" aria-label="Universe Screener">
+      <div class="section-header">
+        <div class="section-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-cyan)" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+          <span>Evaluated Universe Screener</span>
+        </div>
+        <span class="section-tag" id="screener-count-badge">16 Stocks</span>
+      </div>
+
+      <!-- Filter Controls -->
+      <div class="screener-controls-bar">
+        <div class="screener-filter-pills" role="tablist">
+          <button class="filter-pill active" id="filter-all" data-filter="all">All Evaluated</button>
+          <button class="filter-pill" id="filter-confluence" data-filter="confluence">High Confluence (Score > 75)</button>
+          <button class="filter-pill" id="filter-drop" data-filter="drop">Unjustified Drops</button>
+          <button class="filter-pill" id="filter-insider" data-filter="insider">Heavy Insider Cluster Buys</button>
+          <button class="filter-pill" id="filter-breakout" data-filter="breakout">Volume Breakouts (RVOL > 2x)</button>
+          <button class="filter-pill" id="filter-sentiment" data-filter="sentiment">Bullish Sentiment Buzz</button>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+          <input type="text" class="screener-search-input" id="screener-search" placeholder="Search ticker, company, or sector...">
+          <div class="add-ticker-box">
+            <input type="text" class="add-ticker-input" id="add-ticker-input" placeholder="+ Ticker (e.g. NFLX)" maxlength="6">
+            <button class="add-ticker-btn" id="add-ticker-btn">+ Add Stock</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Screener Table -->
+      <div class="trading-table-wrap">
+        <table class="trading-table" id="screener-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Ticker</th>
+              <th>Company Name</th>
+              <th>Price</th>
+              <th>24h Chg</th>
+              <th>Convergence Score</th>
+              <th>Primary Confluence Catalyst</th>
+              <th>RVOL</th>
+              <th>Wall St Upside</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="screener-table-tbody">
+            <!-- Injected by app.js -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Notification Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="/static/js/api.js?v=2.5"></script>
+  <script src="/static/js/chart.js?v=2.5"></script>
+  <script src="/static/js/radar.js?v=2.5"></script>
+  <script src="/static/js/app.js?v=2.5"></script>
+</body>
+</html>
