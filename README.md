@@ -99,3 +99,10 @@ stock_recommendations/
 
 4. **Explore the Interactive REST API**:
    Navigate to [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+5. **Auto-Git-Sync Daemon**:
+   To automatically stage, commit, and push whenever files are saved:
+   ```powershell
+   python auto_git_sync.py
+   ```
+   Repository hosted at: [https://github.com/benny-abramov/stock_recommendations](https://github.com/benny-abramov/stock_recommendations)
